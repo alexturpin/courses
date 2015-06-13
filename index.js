@@ -5,8 +5,8 @@ var express = require('express'),
 
 var app = express();
 
-app.get('/:file', function (req, res) {
-	fs.readFile(path.join(__dirname, req.params.file), "utf-8", function(err, data) {
+app.get('/:topic', function (req, res) {
+	fs.readFile(path.join(__dirname, req.params.topic, 'index.md'), "utf-8", function(err, data) {
 		if (err) return res.status(500).end(err.toString());
 
 		res.send(md.render(data));
