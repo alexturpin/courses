@@ -51,7 +51,7 @@ I've made a list of my favorite books and my favorite movies. I'd like to positi
 	</ul>
 ```
 
-We can see that it kind of works, but now we have a big space in the middle of the two lists. This is because when we float elements, they will try to go as far left or as far right as they can. In order for our two lists to be next to each other, we can simply float them both to the left.
+We can see that it kind of works, but now we have a big space in the middle of the two lists. _This is because when we float elements, they will try to go as far left or as far right as they can._ In order for our two lists to be next to each other, we can simply float them both to the left.
 
 This is much better, and will allow us to work with more than two elements should we wish to. We can always adjust the space between our lists using the margin properties that we have learned of previously.
 
@@ -117,7 +117,7 @@ Let's take the previous example again, and this time we will add some text in a 
 	}
 ```
 
-We can see that despite being no `float` property assigned to our paragraph, it still appears next to the lists instead of under them as expected. This is a result of the behaviour of floats; when an elemented is floated, subsequent elements will try to position themselves next to it, even if we haven't told those elements to float. In order to fix it, CSS provides a property called `clear`. We can use this property to disable floating for the desired elements. We can disable either left floating (using the value `left`), right floating (using the value `right`), or even both left and right floating (using the value `both`).
+We can see that despite there being no `float` property assigned to our paragraph, it still appears next to the lists instead of under them as expected. This is a result of the behaviour of floats; _when an elemented is floated, subsequent elements will try to position themselves next to it, even if we haven't told those elements to float_. In order to fix it, CSS provides a property called `clear`. We can use this property to disable floating for the desired elements. We can disable either left floating (using the value `left`), right floating (using the value `right`), or even both left and right floating (using the value `both`).
 
 ```CSS
 	.my-element {
@@ -132,7 +132,7 @@ Try modifying the CSS of this example to apply a `clear` property on our paragra
 Container height problem
 ------------------------
 
-Another problem can be encountered when we only have float elements inside of a parent element. Take the following example:
+Another problem can be encountered when we only have floated elements inside of a parent element. Take the following example:
 
 ```HTML
 	<div class="container">
@@ -156,11 +156,52 @@ Another problem can be encountered when we only have float elements inside of a 
 	}
 ```
 
-To observe the problem, try modifying the CSS of the example to apply a border around the `<div>` with the class _container_.
+To observe the problem, try modifying the CSS of the example to apply a border around the "container" `<div>`.
 
-You will notice that the border does not go around the two lists as expected; instead, there is simply a line above the two lists where the container would start. The reason this happens is because floated elements don't contribute to the height of their parents. So if a parent element contains only floated elements, its height will effectively be zero.
+You will notice that the border does not go around the two lists as expected; instead, there is simply a line above the two lists where the container would start. The reason this happens is because _floated elements don't contribute to the height of their parents_. So if a parent element contains only floated elements, its height will effectively be zero.
 
-We can fix that with a small trick using the `overflow` property. 
+We could fix this by adding another element with a `clear` at the end of our container, but a much better way is to use a small trick using the `overflow` property. We've seen before that the `overflow` property allows us to decide how we want "overflowing" content to behave, that is, content that runs past the borders of our elements. In this case, we can use this property to fix our float problem by setting it to `auto`. This will tell the browser to expand to the full height of its contained floated elements.
+
+Try modifying the CSS of this example to achieve this.
+
+```CSS
+	.my-element-that-contains-floats {
+		overflow: auto;
+	}
+```
 
 Layout
 ------
+
+For a final exercise on floats, we will implement the layout of a website. A lot of websites these days position their main components in a particular way. This is what we call a layout. The following layout may be familiar to you; usually, there is the header of the website at the very top, taking full width of the page. Then, below the header, there are three columns: the navigation, the main content, and an aside. Finally, at the bottom and also taking the full width, there is a footer.
+
+[example image here]
+
+```HTML
+	<header>
+		<h1>My Website!</h1>
+	</header>
+	<nav>
+		<a href="#">Home</a>
+		<a href="#">About</a>
+		<a href="#">Products</a>
+		<a href="#">Contact</a>
+	</nav>
+	<section>
+		<h1>Welcome to my website!</h1>
+		<p>Hope you enjoy your visit.</p>
+	</section>
+	<aside>
+		<h2>Our featured products</h2>
+		<ul>
+			<li>World famous smoked meat</li>
+			<li>Finger lickin' donuts</li>
+		</ul>
+	</aside>
+	<footer>
+		<p>&copy; 2015 My Website</p>
+	</footer>
+```
+
+We would like to apply CSS styles to the various elements of this page in order to recreate this layout. The `<header>` and `<footer>` elements should take the full width (100%) of the page. The main `<section>` should take up 40% of the width of the page, and the `<nav>` and `<aside>` elements should take up the rest. The `<nav>`, `<section>` and `<aside>` should all be next to each other as part of a 3 column layout, just like in the example image. This can be done with floats. You can play with the width of the `<nav>` and `<section>` and the padding of all elements to make it all fits well together.
+
