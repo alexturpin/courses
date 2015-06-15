@@ -131,3 +131,36 @@ Try modifying the CSS of this example to apply a `clear` property on our paragra
 
 Container height problem
 ------------------------
+
+Another problem can be encountered when we only have float elements inside of a parent element. Take the following example:
+
+```HTML
+	<div class="container">
+		<ul>
+			<li>A Tale Of Two Cities</li>
+			<li>The Catcher in the Rye</li>
+			<li>The Adventures of Huckleberry Finn</li>
+		</ul>
+		
+		<ul>
+			<li>GoldenEye</li>
+			<li>Jurassic Park</li>
+			<li>Catch Me If You Can</li>
+		</ul>
+	</div>
+```
+
+```CSS
+	ul {
+		float: left;
+	}
+```
+
+To observe the problem, try modifying the CSS of the example to apply a border around the `<div>` with the class _container_.
+
+You will notice that the border does not go around the two lists as expected; instead, there is simply a line above the two lists where the container would start. The reason this happens is because floated elements don't contribute to the height of their parents. So if a parent element contains only floated elements, its height will effectively be zero.
+
+We can fix that with a small trick using the `overflow` property. 
+
+Layout
+------
